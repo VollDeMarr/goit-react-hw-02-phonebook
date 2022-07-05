@@ -26,6 +26,13 @@ class Phoneboock extends Component {
       return { contacts: [...prevState.contacts, data] };
     });
   };
+
+  removeContact = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   render() {
     return (
       <div className={s.container}>
@@ -35,7 +42,10 @@ class Phoneboock extends Component {
         </div>
         <h2>Contacts</h2>
         <div>
-          <Contacts contacts={this.state.contacts} />
+          <Contacts
+            contacts={this.state.contacts}
+            removeFn={this.removeContact}
+          />
         </div>
       </div>
     );
