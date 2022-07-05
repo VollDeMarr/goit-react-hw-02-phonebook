@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 import Contacts from '../Contacts/Contacts';
 import Form from '../Form/Form';
+import Filter from '../Filter/Filter';
+
 import s from './Phoneboock.module.css';
 
 class Phoneboock extends Component {
@@ -41,6 +43,7 @@ class Phoneboock extends Component {
           <Form onSubmit={this.formSubmit} />
         </div>
         <h2>Contacts</h2>
+        <Filter />
         <div>
           <Contacts
             contacts={this.state.contacts}
