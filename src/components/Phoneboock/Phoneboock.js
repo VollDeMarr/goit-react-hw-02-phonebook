@@ -35,7 +35,22 @@ class Phoneboock extends Component {
     }));
   };
 
+  filterList = e => {
+    this.setState({ filter: e.target.value });
+  };
+
+  getVisibleContacts = () => {
+    const { contacts, filter } = this.state;
+
+    const inLowerCase = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(inLowerCase)
+    );
+  };
   render() {
+    const filteredContacts = this.getVisibleContacts();
+
     return (
       <div className={s.container}>
         <h1>Phoneboock</h1>
@@ -43,12 +58,9 @@ class Phoneboock extends Component {
           <Form onSubmit={this.formSubmit} />
         </div>
         <h2>Contacts</h2>
-        <Filter />
-        <div>
-          <Contacts
-            contacts={this.state.contacts}
-            removeFn={this.removeContact}
-          />
+        <Filter value={this.state.filter} onChange={this.filterList} />
+        <div className={s.contactsWrapper}>
+          <Contacts contacts={filteredContacts} removeFn={this.removeContact} />
         </div>
       </div>
     );
